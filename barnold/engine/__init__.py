@@ -19,7 +19,7 @@ import bpy
 import bgl
 from mathutils import Matrix, Vector, geometry
 
-from . import arnold
+from .python import arnold
 
 from ..nodes import (
     ArnoldNode,
@@ -154,11 +154,45 @@ class Shaders:
                 arnold.AiNodeSetFlt(node, "Kd", mat.diffuse_intensity)
                 arnold.AiNodeSetRGB(node, "Kd_color", *mat.diffuse_color)
                 arnold.AiNodeSetFlt(node, "diffuse_roughness", standard.diffuse_roughness)
+                arnold.AiNodeSetFlt(node, "direct_diffuse", standard.direct_diffuse)
+                arnold.AiNodeSetFlt(node, "indirect_diffuse", standard.indirect_diffuse)
                 arnold.AiNodeSetFlt(node, "Ks", mat.specular_intensity)
                 arnold.AiNodeSetRGB(node, "Ks_color", *mat.specular_color)
-                arnold.AiNodeSetFlt(node, "specular_roughness", standard.specular_roughness)
+                arnold.AiNodeSetFlt(node, "specular_roughness", standard.specular_roughness) 
                 arnold.AiNodeSetFlt(node, "specular_anisotropy", standard.specular_anisotropy)
                 arnold.AiNodeSetFlt(node, "specular_rotation", standard.specular_rotation)
+                arnold.AiNodeSetStr(node, "specular_distribution", "ggx")
+                arnold.AiNodeSetFlt(node, "direct_specular", standard.direct_specular)
+                arnold.AiNodeSetFlt(node, "indirect_specular", standard.indirect_specular)
+                arnold.AiNodeSetBool(node, "specular_Fresnel", standard.specular_Fresnel)
+                arnold.AiNodeSetFlt(node, "Ksn", standard.Ksn)
+                arnold.AiNodeSetBool(node, "Fresnel_affect_diff", standard.Fresnel_affect_diff)
+                arnold.AiNodeSetFlt(node, "Kr", standard.Kr)
+                arnold.AiNodeSetRGB(node, "Kr_color", *standard.Kr_color)
+                arnold.AiNodeSetRGB(node, "reflection_exit_color", *standard.reflection_exit_color)
+                arnold.AiNodeSetBool(node, "reflection_exit_use_environment", standard.reflection_exit_use_environment)
+                arnold.AiNodeSetFlt(node, "Kt", standard.Kt)
+                arnold.AiNodeSetRGB(node, "Kt_color", *standard.Kt_color)
+                arnold.AiNodeSetRGB(node, "transmittance", *standard.transmittance)
+                arnold.AiNodeSetFlt(node, "refraction_roughness", standard.refraction_roughness)
+                arnold.AiNodeSetRGB(node, "refraction_exit_color", *standard.refraction_exit_color)
+                arnold.AiNodeSetBool(node, "refraction_exit_use_environment", standard.refraction_exit_use_environment)
+                arnold.AiNodeSetFlt(node, "IOR", standard.IOR)
+                arnold.AiNodeSetBool(node, "Fresnel", standard.Fresnel)
+                arnold.AiNodeSetFlt(node, "Krn", standard.Krn)
+                arnold.AiNodeSetBool(node, "Fresnel_use_IOR", standard.Fresnel_use_IOR)
+                arnold.AiNodeSetFlt(node, "emission", standard.emission)
+                arnold.AiNodeSetRGB(node, "emission_color", *standard.emission_color)
+                arnold.AiNodeSetStr(node, "sss_profile", "empirical")
+                arnold.AiNodeSetFlt(node, "Ksss", standard.Ksss)
+                arnold.AiNodeSetRGB(node, "Ksss_color", *standard.Ksss_color)
+                arnold.AiNodeSetRGB(node, "sss_radius", *standard.sss_radius)
+                arnold.AiNodeSetBool(node, "enable_glossy_caustics", standard.enable_glossy_caustics)
+                arnold.AiNodeSetBool(node, "enable_reflective_caustics", standard.enable_reflective_caustics)
+                arnold.AiNodeSetBool(node, "enable_refractive_caustics", standard.enable_refractive_caustics)
+                arnold.AiNodeSetBool(node, "enable_internal_reflections", standard.enable_internal_reflections)
+                arnold.AiNodeSetRGB(node, "opacity", *standard.opacity)
+                arnold.AiNodeSetFlt(node, "dispersion_abbe", standard.dispersion_abbe)
                 # TODO: other standard node parmas
             elif shader.type == 'utility':
                 utility = shader.utility
